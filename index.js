@@ -82,10 +82,10 @@ inquirer
     }
   ])
   .then((response) =>{
-    console.log(response);
-    const readMeContent = generateMd(response)
+    const readMeContent = generateMd(response);
+    const readMeName = `${response.projectName}.md`
   
-    fs.writeFile('README2.md', readMeContent, function(err) {
+    fs.writeFile(readMeName, readMeContent, function(err) {
     console.log('Success!');
   })
 })
