@@ -1,5 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
+const fs = require("fs");
+const generateMd = require("./utils/generateMarkdown")
 // TODO: Create an array of questions for user input
 const questions = [
   "What is your GitHub username?",
@@ -16,13 +18,15 @@ const questions = [
 const [ username, email, projectName, shortDesc, license, installCommand, testCommand, userUse, userContribute] = questions
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+// function writeToFile(fileName, data) {}
 
-// TODO: Create a function to initialize app
-function init() {}
 
-// Function call to initialize app
-init();
+
+// // TODO: Create a function to initialize app
+// function init() {}
+
+// // Function call to initialize app
+// init();
 
 
 inquirer
@@ -50,7 +54,7 @@ inquirer
     {
       type: 'list',
       message: license,
-      choices: ["MIT", "APACHE 2.0", "GPL 3.0", "BSD 3","None"],
+      choices: ["MIT", "APACHE2.0", "GPL3.0", "BSD3", "None"],
       default: "MIT",
       name: 'license',
     },
@@ -75,8 +79,13 @@ inquirer
       type: 'input',
       message: userContribute,
       name: 'userContribute',
-    },
+    }
   ])
   .then((response) =>{
     console.log(response);
-  });
+    const readMeContent = generateMd(response)
+  
+    fs.writeFile('README2.md', readMeContent, function(err) {
+    console.log('Success!');
+  })
+})
